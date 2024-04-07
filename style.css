@@ -195,10 +195,11 @@
     background-color: black;
     align-items: center;
     text-align: center;
+    justify-content: center;
   }
   
 
   .footer__logo {
-    width: 30%;
-    height: 30%;
+    width: 10%;
+    height: 10%;
   }
