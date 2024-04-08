@@ -79,8 +79,7 @@
     font-weight: 400;
   }
 
-
-  .header__image_panda {
+  .header__image {
     width: 30%;
     height: 30%;
     border-radius: 50%;
@@ -137,7 +136,12 @@
     margin-top: 3%;
   }
 
-  .information__list {
+  .list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .list__information {
     list-style-type: none;
     font-size: 36px;
     font-weight: 500;
@@ -145,15 +149,10 @@
     margin: auto;
   }
 
-  .list {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .list__icon_star {
+  .list__icon {
     width: 30px;
     height: 30px;
-    margin: 1%;
+    margin: 2% auto 2% auto;
   }
 
   .entertainments {
@@ -165,8 +164,8 @@
     gap: 10%;
   }
 
-
   .card {
+    display: flex;
     display: inline-block;
     flex-wrap: wrap;
     flex-direction: row;
@@ -174,8 +173,8 @@
     width: 350px;
      box-shadow: 4px 4px 5px rgb(187, 0, 178);
     background-color: #7e5edd;
-    margin-bottom: 5%;
-   
+    margin: 6% auto 3% auto;
+    gap: 10%;
   }
   
   .card__title {
