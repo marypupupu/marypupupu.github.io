@@ -5,7 +5,7 @@ if (sessionStorage.getItem('popup_was_pressed') !== "true") {
         sessionStorage.setItem('popup_was_pressed', 'true');
     } 
 }
-}, 15000);
+}, 3000);
 
 document.querySelector('.popup').addEventListener('click', (e) => {
     console.log(e.target.className);
