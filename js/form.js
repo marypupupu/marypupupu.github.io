@@ -3,14 +3,18 @@ const formElement = document.querySelector('.form-body');
 const formInput = formElement.querySelector('.form__field');
 const formError = formElement.querySelector(`.${formInput.id}-error`);
 
-  // Функция принимает массив полей ввода
+document.getElementById("inputButton").disabled = true;
+
+// Функция принимает массив полей ввода
 // и элемент кнопки, состояние которой нужно менять
 const toggleButtonState = (inputList, buttonElement) => {
+  
+buttonElement.classList.add('form__button_inactive');
     // Если есть хотя бы один невалидный инпут
     if (hasInvalidInput(inputList)) {
       // сделай кнопку неактивной
-      buttonElement.classList.add('form__button_inactive');
       document.getElementById("inputButton").disabled = true;
+      console.log("hello");
     } else {
       // иначе сделай кнопку активной
       buttonElement.classList.remove('form__button_inactive');
@@ -25,23 +29,26 @@ const toggleButtonState = (inputList, buttonElement) => {
       // Если поле не валидно, колбэк вернёт true
       // Обход массива прекратится и вся функция
       // hasInvalidInput вернёт true
+      console.log(inputElement);
+      console.log(isValid(formElement, inputElement));
   
-      return !inputElement.validity.valid;
+      return !isValid(formElement, inputElement);
     })
   }; 
 
 
   function validateTel(tel_data) {
     return /^(\+7|8)\([0-9]{3}\)[0-9]{3}-[0-9]{2}-[0-9]{2}$/.test(tel_data)
-        || /^(\+7|8)[0-9]{10}$/.test(tel_data) || tel_data.length === 0;
+        || /^(\+7|8)[0-9]{10}$/.test(tel_data);
   }
   
   function validateEmail(email_data) {
-    return /^[a-zA-Z0-9\-.]*@[a-zA-Z0-9\-.]*.[a-zA-Z]*$/.test(email_data) || email_data.length === 0;
+    return /^[A-Za-z0-9!#$%&\'*+-/=?^_`{|}~]+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)+[A-Za-z]$/.test(email_data);
   }
   
   function validateFeedback(feedback_data) {
-    return /^[а-яА-Я0-9.,?!:;\- ]*$/.test(feedback_data);
+    return (/[а-яА-ЯеЁ]/.test(feedback_data) && /^[а-яА-ЯеЁ0-9.,?!:;\- ]*$/.test(feedback_data) 
+      || /[A-Za-z]/.test(feedback_data) && /^[A-Za-z0-9.,?!:;\- ]*$/.test(feedback_data)) || feedback_data.length === 0;
   }
 
 
@@ -65,7 +72,6 @@ const hideInputError = (formElement, inputElement) => {
     errorElement.textContent = '';
   }; 
 
-
 // Функция, которая проверяет валидность поля
 function isValid(formElement, inputElement) {
   if (inputElement.id === "tel-input") {
@@ -73,6 +79,7 @@ function isValid(formElement, inputElement) {
       showInputError(formElement, inputElement, "Неправильный формат номера");
     } else {
       hideInputError(formElement, inputElement);
+      return true;
     }
   } else
   if (inputElement.id === "email-input") {
@@ -80,13 +87,16 @@ function isValid(formElement, inputElement) {
       showInputError(formElement, inputElement, "Неправильный формат почты");
     } else {
       hideInputError(formElement, inputElement);
+      return true;
+    
     }
   } else 
   if (inputElement.id === "feedback-input") {
     if (!validateFeedback(inputElement.value)) {
-      showInputError(formElement, inputElement, "Неправильный текст фидбека (используйте только символы кириллицы, цифры 0-9, или символы '.', ',', '?', '!', ':', ';'. '-')");
+      showInputError(formElement, inputElement, "Неправильный текст фидбека (используйте только символы кириллицы либо латиницы, цифры 0-9, или символы '.', ',', '?', '!', ':', ';'. '-')");
     } else {
       hideInputError(formElement, inputElement);
+      return true;
     }
   } else if (!inputElement.validity.valid) {
       // showInputError теперь получает параметром форму, в которой
@@ -96,6 +106,7 @@ function isValid(formElement, inputElement) {
       // hideInputError теперь получает параметром форму, в которой
       // находится проверяемое поле, и само это поле
       hideInputError(formElement, inputElement);
+      return true;
   }
 }; 
 
