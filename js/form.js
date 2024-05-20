@@ -43,7 +43,7 @@ buttonElement.classList.add('form__button_inactive');
   }
   
   function validateEmail(email_data) {
-    return /^[A-Za-z0-9!#$%&\'*+-/=?^_`{|}~]+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)+[A-Za-z]$/.test(email_data);
+    return /^[A-Za-z0-9!#$%&\'*+-/=?^_`{|}~]+@[A-Za-z0-9-]+[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)+[A-Za-z]$/.test(email_data);
   }
   
   function validateFeedback(feedback_data) {
